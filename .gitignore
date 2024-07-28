@@ -1,0 +1,5 @@
+client/node_modules
+practicePuttServer/node_modules
+.env
+client/coverage
+dist
