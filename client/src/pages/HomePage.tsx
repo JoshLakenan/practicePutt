@@ -1,4 +1,10 @@
-const HomePage = () => {
+import { PinnipedClient } from "pinniped-sdk";
+
+interface HomePageProps {
+  pnpd: PinnipedClient;
+}
+
+const HomePage = ({ pnpd }: HomePageProps) => {
   return (
     <div className={"home, page"}>
       <h1>Home Page</h1>

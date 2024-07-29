@@ -1,26 +1,30 @@
 import { useState } from "react";
 import { PinnipedClient } from "pinniped-sdk";
 
-interface LoginPageProps {
+interface RegisterPageProps {
   pnpd: PinnipedClient;
 }
 
-const LoginPage = ({ pnpd }: LoginPageProps) => {
+const RegisterPage = ({ pnpd }: RegisterPageProps) => {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     try {
-      await pnpd.auth.login(username, password);
+      if (password !== confirmPassword) {
+        throw new Error("Passwords do not match");
+      }
+      await pnpd.auth.register(username, password);
     } catch (error) {
       setError(error.message);
     }
   };
 
   return (
-    <div className={"login, page"}>
-      <h1>Login</h1>
+    <div className="page">
+      <h1>Register</h1>
       <form className="auth">
         <input
           type="text"
@@ -34,12 +38,18 @@ const LoginPage = ({ pnpd }: LoginPageProps) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+
+        <button onClick={handleRegister}>Register</button>
         {error && <p>{error}</p>}
       </form>
-
-      <button onClick={handleLogin}>Login</button>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

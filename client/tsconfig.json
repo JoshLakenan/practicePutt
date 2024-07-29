@@ -7,12 +7,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
 
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
@@ -21,6 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "jest.setup.ts", "../types"],
+  "include": ["src", "jest.setup.ts", "react-app-env.d.ts"],
+  "exclude": ["node_modules", "build", "dist", "coverage", "public"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
